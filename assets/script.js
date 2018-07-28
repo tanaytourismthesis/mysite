@@ -1,6 +1,6 @@
 $(function() {
 	//function to load the news using parameters
-<<<<<<< HEAD
+
 	function add_news(newtitle)	{
 		$.post(
 		'test/add_news',
@@ -14,11 +14,7 @@ $(function() {
 		});
 	}
 	
-	
-	function load_news(title,start) {
-=======
 	function load_news(title, start, limit) {
->>>>>>> dbd3dfb290a95db805ce825f19e055a99c07529a
 		var tbody = $('#tblNews tbody');
 		tbody.html('<tr><td colspan="3" align="center">Searching news list...</td></tr>');
 		//submit data then retrieve from news_model 
