@@ -1,6 +1,24 @@
 $(function() {
 	//function to load the news using parameters
+<<<<<<< HEAD
+	function add_news(newtitle)	{
+		$.post(
+		'test/add_news',
+			{
+				newstitle: newtitle
+			}
+		).done(function(data){
+			var msg = data.message;
+			$('#alert_msg').html(msg);
+			load_news('',0);
+		});
+	}
+	
+	
+	function load_news(title,start) {
+=======
 	function load_news(title, start, limit) {
+>>>>>>> dbd3dfb290a95db805ce825f19e055a99c07529a
 		var tbody = $('#tblNews tbody');
 		tbody.html('<tr><td colspan="3" align="center">Searching news list...</td></tr>');
 		//submit data then retrieve from news_model 
@@ -115,12 +133,24 @@ $(function() {
 		load_news(text,start,limit);
   });
 	
+	$('#btnAdd').on('click', function(){
+    $('.AddNewsForm').show();
+  });	
+	
+	$('#btnHideNews').on('click', function(){
+    $('.AddNewsForm').hide();
+  });
+	
+	$('#btnAddNews').on('click', function(){
+   var newTitle =  $('#txtAddNews').val();
+	 add_news(newTitle);
+  });
+	
 	$('#mnuFilter').on('change', function(){
 		var limit = $(this).val();
 		var text = $('#txtSRC').val();
 		$('#pageno').html('1');
 		load_news(text,0,limit);
 	});
-	
 	
 });
