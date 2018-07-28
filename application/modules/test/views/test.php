@@ -24,4 +24,14 @@
 		</tr>
 	</tfoot>
 </table>
+<center>
+	<div class="AddNewsForm" style="display:none">
+		<input type="text" id="txtAddNews" style="width:30%;" placeholder="Add News Here" />
+		<button type="button" id="btnAddNews">Add News</button>
+		<button type="button" id="btnHideNews">Hide</button>
+		<span id="alert_msg"></span>
+	</div>
+	
+	
+</center>
 

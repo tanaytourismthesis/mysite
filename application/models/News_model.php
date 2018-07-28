@@ -22,6 +22,7 @@ class News_model extends CI_Model {
 							'title' => $title
 						)
 					),
+					'order' => 'dateposted DESC',
 					'start' => $start,
 					'limit' => $limit
 				)
@@ -43,8 +44,29 @@ class News_model extends CI_Model {
 				),
         false,
         true
-          
 			);
   }
+	
+	public function add_new_news($newstitle)
+	{
+		$slug = "Wow";
+		$content = "Isa kang alamat dall";
+		$count = 4;
+		$time = 5;
+		$hits = 6;
+		$authorid = 1;
+		return $this->query->insert('news',
+			array(
+				'title' => $newstitle,
+				'slug' =>  $slug,
+				'text_content' => $content,
+				'word_count' => $count,
+				'reading_time' => $time,
+				'dateposted' => date('Y-m-d H:i:s'),
+				'num_hits' => $hits,
+				'authorID' => $authorid		
+			)
+		);
+	}
 }
 

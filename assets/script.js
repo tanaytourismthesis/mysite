@@ -1,5 +1,19 @@
 $(function() {
 	//function to load the news using parameters
+	function add_news(newtitle)	{
+		$.post(
+		'test/add_news',
+			{
+				newstitle: newtitle
+			}
+		).done(function(data){
+			var msg = data.message;
+			$('#alert_msg').html(msg);
+			load_news('',0);
+		});
+	}
+	
+	
 	function load_news(title,start) {
 		var tbody = $('#tblNews tbody');
 		tbody.html('<tr><td colspan="3" align="center">Searching news list...</td></tr>');
@@ -101,5 +115,22 @@ $(function() {
     pageChecker();
     
   });
+	
+	$('#btnAdd').on('click', function(){
+    $('.AddNewsForm').show();
+  });	
+	
+	$('#btnHideNews').on('click', function(){
+    $('.AddNewsForm').hide();
+  });
+	
+	$('#btnAddNews').on('click', function(){
+   var newTitle =  $('#txtAddNews').val();
+	 add_news(newTitle);
+  });
+	
+	
+	
+	
 	
 });

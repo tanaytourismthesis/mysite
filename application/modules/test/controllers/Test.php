@@ -80,4 +80,24 @@ class Test extends MX_Controller {
 		header( 'Content-Type: application/x-json' );
 		echo json_encode( $data );
   }
+	
+	public function add_news()
+	{
+		$data['response'] = FALSE;
+		$data['message'] = 'Please check required fields or check your network connection.';
+		
+		$newstitle = $this->input->post('newstitle');
+		$res = $this->news_model->add_new_news($newstitle);
+			
+		if ($res === TRUE)
+		{
+			$data['response'] = TRUE;
+			$data['message'] = 'Successfully added new article.';
+		}
+		
+		header( 'Content-Type: application/x-json' );
+		echo json_encode( $data );
+		
+		
+	}
 }
