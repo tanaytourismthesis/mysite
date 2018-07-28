@@ -16,10 +16,17 @@
 	<tfoot>
 		<tr>
 			<td colspan="3">
+			Show
+				<select id="mnuFilter">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+				</select>
+				Items
+				::
         Page <span id="pageno">1</span> of <span id="totalpages">1</span>
 				<button type="button" id="btnPrev">Previous</button>
 				<button type="button" id="btnNext">Next</button>  
-				<button type="button" id="btnAdd">Add</button>
 			</td>
 		</tr>
 	</tfoot>

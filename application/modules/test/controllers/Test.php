@@ -37,6 +37,8 @@ class Test extends MX_Controller {
 	
 	public function load_news() {
 		$title = $this->input->post('title') ?? NULL;
+		$limit = $this->input->post('limit') ?? NULL;
+		$start = $this->input->post('start') ?? NULL;
 		
 		$data['response'] = FALSE;
 		
@@ -45,7 +47,7 @@ class Test extends MX_Controller {
 		}
 		
 		try {
-			$result = $this->news_model->load_news_list($title);
+			$result = $this->news_model->load_news_list($title,$start,$limit);
 			
 			if (!empty($result)) {
 				$data['data'] = $result;
