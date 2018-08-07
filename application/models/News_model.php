@@ -68,5 +68,31 @@ class News_model extends CI_Model {
 			)
 		);
 	}
+	
+	public function get_news($id = '')
+	{	
+		return $this->query->select(
+				array(
+					'table' => 'news',
+					'fields' => '*',
+					'conditions' => array (
+						'id' => $id
+					)
+				)
+			);		
+	}
+	
+	public function update_news($id,$newTitleNews)
+	{
+		return $this->query->update(
+					'news',
+						array(
+							'id' => $id
+						),
+						array(
+							'title' => $newTitleNews
+						)
+			);		
+	}
 }
 

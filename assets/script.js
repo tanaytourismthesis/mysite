@@ -9,8 +9,13 @@ $(function() {
 			}
 		).done(function(data){
 			var msg = data.message;
+			var pagenum = parseInt($('#pageno').text());
+			var limit = parseInt($('#mnuFilter').val());
+			var text = $('#txtSRC').val();
+			var start = (pagenum-1)*limit;
+			
 			$('#alert_msg').html(msg);
-			load_news('',0);
+			load_news(text,start,limit);
 		});
 	}
 	
@@ -38,6 +43,30 @@ $(function() {
 						$('<td></td>').html(value.title)
 					).append(
 						$('<td></td>').html(value["dateposted"])
+					).append(
+						$('<td></td>').append(
+							$(
+								'<button></button>', {
+									'id' : 'btnUpdate',
+									'data-id': value['id']
+								}
+							).on('click', function() {
+								$.get(
+									'test/get_news/'+value['id']
+								).done(function(data){
+									if(data.response)
+									{
+										$('#news_id').html(value['id']);
+										$('#txtUpdateNews').val(data.data[0].title);
+										$('.UpdateNewsForm').show();
+									}
+									else
+									{
+										console.log(data.message);
+									}
+								});
+							}).html('Edit')
+						)
 					);
 					tbody.append(tr);
 				});
@@ -137,9 +166,14 @@ $(function() {
     $('.AddNewsForm').hide();
   });
 	
+	$('#btnCancelUpdate').on('click', function(){
+    $('.UpdateNewsForm').hide();
+  });
+	
 	$('#btnAddNews').on('click', function(){
-   var newTitle =  $('#txtAddNews').val();
-	 add_news(newTitle);
+		var newTitle =  $('#txtAddNews').val();
+
+		add_news(newTitle);	
   });
 	
 	$('#mnuFilter').on('change', function(){
@@ -148,5 +182,27 @@ $(function() {
 		$('#pageno').html('1');
 		load_news(text,0,limit);
 	});
+	
+	$('#btnUpdateNews').on('click', function(){
+		var title =	$('#txtUpdateNews').val();
+		var id = $('#news_id').text();
+		
+		$.post(
+			'test/update_news',
+			{
+				newstitlenews: title,
+				id: id
+			}
+		).done(function(data){
+			var msg = data.message;
+			var pagenum = parseInt($('#pageno').text());
+			var limit = parseInt($('#mnuFilter').val());
+			var text = $('#txtSRC').val();
+			var start = (pagenum-1)*limit;
+			
+			$('#alert_msg').html(msg);
+			load_news(text,start,limit);
+		});
+  });
 	
 });
